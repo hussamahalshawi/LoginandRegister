@@ -27,7 +27,7 @@ class User:
     def check_user(email, password):
         user = User.get_user(email)
         # if user.email == email and user.password == password:
-
+        # print(user.password)
         if user:
             if bcrypt.checkpw(password, user.password):
                 print('True')
