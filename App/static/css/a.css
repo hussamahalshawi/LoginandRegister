@@ -1,0 +1,560 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url(../images/R.jpg);
+    background-size: cover;
+    background-position: center
+}
+
+header{
+    background-color: #05190A;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background-color:rgba(255, 255, 255, 0.2);
+    background-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999;
+
+    display: black;
+    list-stylle-type: disc;
+    margin-block-end: lem;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+header .navigation ul {
+    float: right;
+    margin-right: 20px;
+}
+
+header .navigation ul li {
+    display: inline-block;
+    line-height: 50px;
+    margin: 0 5px;
+}
+
+header .navigation ul li a {
+    position: relative;
+    font-size: 1.1em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+header .navigation ul li a::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    border-radius: 5px;
+    transform-origin: 50% 50%;
+    transform: transform .5s;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    background: linear-gradient(to right, #fff, #f3f3f3);
+}
+
+header .navigation ul li a:hover::after{
+    transform-origin: right;
+    transform: scalex(1);
+}
+
+header .navigation ul li .btnLogin-popup {
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+header .navigation ul li .btnLogin-popup:hover {
+    background-color: #05190A;
+    color: #fff;
+}
+
+ul li a.active, ul li a:hover{
+    background: #05190A;
+    transition: .5s;
+}
+
+.check_btn{
+    font-size: 25px;
+    color: white;
+    float: left;
+    line-height: 50px;
+    margin-right: 10px;
+    cursor: pointer;
+    display: none;
+}
+
+#check{
+    display:none;
+}
+
+
+@media(max-width:858px){
+    .check_btn{
+        display: block;
+    }
+    ul{
+        position: fixed;
+        width: 50%;
+        height: 70vh;
+        background: #2c5038;
+        top: 100px;
+        left: -100%;
+        text-align: left;
+        transition: all .5s;
+        border: 2px solid #c9c8c8;
+        border-radius: 6px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    }
+    header .navigation ul li {
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+    header .navigation ul li a {
+        font-size: 20px;
+    }
+    #check:checked ~ ul{
+        left: 0;
+    }
+}
+
+/* logo  */
+
+.logo{
+    color: white;
+    user-select: none;
+    font-size: 25px;
+    line-height: 50px;
+    padding: 0 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
+.cover_box{
+    position: relative;
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid #c9c8c8;
+    border-radius: 20px;
+    border-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0);
+    /* overflow: hidden; */
+    transition: transform .5s ease, height .2s ease, border-color 0.5s ease;
+}
+
+.cover_box:hover{
+    border-color: #fff;
+    animation: border-glow is infinite alternate;
+}
+
+@keyframes border-glow{
+    from{
+        border-color: #f6f8f6;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+    to{
+        border-color: #fff;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+    }
+}
+
+.cover_box.active-popup{
+    transform: scale(1);
+}
+
+.cover_box.active{
+    height: 520px;
+}
+
+.cover_box .form-box{
+    width: 100%;
+    padding: 40px;
+}
+
+.cover_box .form-box.login{
+    transition: transform .50s ease;
+    transform: translatex(0);
+}
+
+.cover_box.active .form-box.login{
+    transition: none;
+    transform: translatex(-400px);
+}
+
+.cover_box .form-box.register{
+    position: absolute;
+    transition: none;
+    transform: translatex(-400px);
+}
+
+.cover_box.active .form-box.register{
+    transition: transform .50s ease;
+    transform: translatex(0);
+}
+
+.cover_box .icon-close{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 45px;
+    height: 45px;
+    background: #05190A;
+    font-size: 2em;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.form-box h2{
+    font-size: 2em;
+    color: #05190A;
+    text-align: center;
+}
+
+.input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box label{
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #05190A;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 1px solid #05190A;
+    border-radius: 10px;
+    outline: none;
+    font-size: 1em;
+    color: #05190A;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+.input-box .icon{
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: #05190A;
+    line-height: 57px;
+}
+
+.remember-forgot{
+    font-size: .9em;
+    color: #05190A;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot{
+    accent-color: #05190A;
+    margin-right: 3px;
+}
+
+.remember-forgot a {
+    color: #05190A;
+    text-decoration: underline;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+
+.btn{
+    width: 100%;
+    height: 45px;
+    background-color: #05190A;
+    border: none;
+    outline: none;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+}
+
+.login-register{
+    font-size: .9em;
+    color: #c9c8c8;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.login-register p a {
+    color: #9a9a9a;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-register p a:hover{
+    text-decoration: underline;
+}
+
+/* footer  */
+
+.footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    background-filter: blur(10px);
+}
+
+.footer-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: colum;
+    padding: 0;
+}
+
+.social-icons a{
+    color: #fff;
+    font-size: 1.5em;
+    margin: 0 10px;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-content p {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.social-icons a:hover {
+    color: #05190A;
+}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Code Hub</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('https://via.placeholder.com/1280x720') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 300px;
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background: #555;
+        }
+
+        .form-container a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .form-container a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 0;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div><strong>DIGITAL CODE HUB</strong></div>
+    <div>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">Login</a>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Login Form -->
+    <div class="form-container" id="login-form">
+        <h2>Login</h2>
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <div style="display: flex; justify-content: space-between;">
+            <label><input type="checkbox"> Remember me</label>
+            <a href="#">Forgot password?</a>
+        </div>
+        <button>Login</button>
+        <p>Don't have an account? <a href="#register-form">Register</a></p>
+    </div>
+
+    <!-- Register Form -->
+    <div class="form-container" id="register-form" style="display: none;">
+        <h2>Register</h2>
+        <input type="text" placeholder="Username">
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <div style="display: flex; justify-content: space-between;">
+            <label><input type="checkbox"> Agree to terms & conditions</label>
+        </div>
+        <button>Register</button>
+        <p>Already have an account? <a href="#login-form">Login</a></p>
+    </div>
+</div>
+
+<footer>
+    &copy; 2023 Digital Code Hub. All rights reserved.
+    <div>
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">LinkedIn</a>
+    </div>
+</footer>
+
+<script>
+    // Toggle between forms
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', event => {
+            event.preventDefault();
+            document.querySelectorAll('.form-container').forEach(form => form.style.display = 'none');
+            document.querySelector(link.getAttribute('href')).style.display = 'block';
+        });
+    });
+</script>
+
+</body>
+</html>
