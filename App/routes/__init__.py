@@ -5,6 +5,7 @@ import bcrypt
 from flask import Blueprint, request, render_template, redirect, url_for, current_app, make_response
 import jwt
 from App.models.user import User
+from App import mongo
 
 
 auth = Blueprint('user', __name__, url_prefix='/')
@@ -43,7 +44,7 @@ def login():
         if form == login_:
             email = request.form['email']
             password = request.form['password'].encode('utf-8')
-            user = User.check_user(email, password)
+            user = User.check_user(email, password, mongo)
             if user:
                 token = jwt.encode({
                     'username': user.username,
@@ -60,8 +61,8 @@ def login():
             password = request.form['password'].encode('utf-8')
             hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
             user = User(custom_id, username, email, hashed_password)
-            user.create_user(user)
-            user = User.check_user(email, password)
+            user.create_user(user, mongo)
+            user = User.check_user(email, password, mongo)
             if user:
                 token = jwt.encode({
                     'username': user.username,

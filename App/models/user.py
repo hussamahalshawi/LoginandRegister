@@ -1,5 +1,4 @@
 import bcrypt
-from App import mongo
 
 class User:
     def __init__(self, custom_id, username, email, password):
@@ -18,14 +17,14 @@ class User:
         }
 
     @staticmethod
-    def get_user(email):
+    def get_user(email, mongo):
         user = mongo.db.users.find_one({"email": email})
         user = User(user['_id'], user['username'], user['email'], user['password'])
         return user
 
     @staticmethod
-    def check_user(email, password):
-        user = User.get_user(email)
+    def check_user(email, password, mongo):
+        user = User.get_user(email, mongo)
         # if user.email == email and user.password == password:
         # print(user.password)
         if user:
@@ -43,10 +42,10 @@ class User:
     #     return mongo.db.users.insert_one(user)
 
     @staticmethod
-    def create_user(user):
+    def create_user(user, mongo):
         user_d = User.to_dict(user)
-        return User.update_user(user.username, user_d)
+        return User.update_user(user.username, user_d, mongo)
 
     @staticmethod
-    def update_user(username, user):
+    def update_user(username, user, mongo):
         return mongo.db.users.update_one({"username": username}, {"$set": user}, upsert=True)
