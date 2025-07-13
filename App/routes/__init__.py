@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from functools import wraps
 import bcrypt
 from flask import Blueprint, request, render_template, redirect, url_for, current_app, make_response
-import jwt as pyjwt
+import jwt
 from App.models.user import User
 from App import mongo
 
@@ -36,7 +36,7 @@ def token_required(f):
         if not token:
             return redirect(url_for('user.login'))
         try:
-            data = pyjwt.decode(token, current_app.config['SECRET_KEY'], algorithms=["HS256"], options={"verify_exp": False})
+            data = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=["HS256"], options={"verify_exp": False})
         except:
             return redirect(url_for('user.login'))
         return f(*args, **kwargs)
@@ -56,7 +56,7 @@ def login():
             password = request.form['password'].encode('utf-8')
             user = User.check_user(email, password, mongo)
             if user:
-                token = pyjwt.encode({
+                token = jwt.encode({
                     'username': user.username,
                     'email': email,
                     'exp': datetime.utcnow() + timedelta(hours=1)
@@ -74,7 +74,7 @@ def login():
             user.create_user(user, mongo)
             user = User.check_user(email, password, mongo)
             if user:
-                token = pyjwt.encode({
+                token = jwt.encode({
                     'username': user.username,
                     'email': email,
                     'exp': datetime.utcnow() + timedelta(hours=1)
@@ -91,7 +91,7 @@ def login():
 def home(username):
     try:
         token = request.cookies['token']
-        user = pyjwt.decode(token, current_app.config['SECRET_KEY'], algorithms=["HS256"], options={"verify_exp": False})
+        user = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=["HS256"], options={"verify_exp": False})
         if user['username'] == username:
             return render_template('user/home.html', title="Home", user=user, show_login=False, show_logout=True)
         else:
