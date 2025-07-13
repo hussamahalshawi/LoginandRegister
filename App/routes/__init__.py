@@ -5,16 +5,21 @@ import bcrypt
 from flask import Blueprint, request, render_template, redirect, url_for, current_app, make_response
 import jwt
 from App.models.user import User
-from App import mongo
+# from App import mongo
 
 
 auth = Blueprint('user', __name__, url_prefix='/')
 @auth.route('/test')
 def test_db():
-    print(mongo.db.list_collection_names())
-    # mongo = current_app.extensions['pymongo']
-    # collections = mongo.db.list_collection_names()
-    # return f"Collections: {collections}"
+    # print(mongo.db.list_collection_names())
+    mongo = current_app.extensions.get('pymongo')
+    if not mongo:
+        return "Mongo not initialized", 500
+    try:
+        collections = mongo.db.list_collection_names()
+        return f"Collections: {collections}"
+    except Exception as e:
+        return f"Error: {str(e)}", 500
 
 @auth.after_request
 def add_header(response):
