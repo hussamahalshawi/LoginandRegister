@@ -48,4 +48,5 @@ class User:
 
     @staticmethod
     def update_user(username, user, mongo):
+        user.pop('_id', None)
         return mongo.db.users.update_one({"username": username}, {"$set": user}, upsert=True)
