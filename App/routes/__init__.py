@@ -9,8 +9,12 @@ from App import mongo
 
 
 auth = Blueprint('user', __name__, url_prefix='/')
-print(mongo.db.list_collection_names())
-
+@auth.route('/test')
+def test_db():
+    print(mongo.db.list_collection_names())
+    # mongo = current_app.extensions['pymongo']
+    # collections = mongo.db.list_collection_names()
+    # return f"Collections: {collections}"
 
 @auth.after_request
 def add_header(response):
