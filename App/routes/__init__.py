@@ -9,6 +9,7 @@ from App import mongo
 
 
 auth = Blueprint('user', __name__, url_prefix='/')
+print(mongo.db.list_collection_names())
 
 
 @auth.after_request
